@@ -1,0 +1,338 @@
+$breakpoints: (
+    "md": 768px,
+    "lg": 1248px,
+);
+
+$black-color: #000;
+$white-color: #fff;
+$bg-color: #304571;
+$primary-color: #ebff00;
+$active-color: #ff70d9;
+
+@mixin md {
+    @media (min-width: map-get($breakpoints, "md")) {
+        @content;
+    }
+}
+
+@mixin lg {
+    @media (min-width: map-get($breakpoints, "lg")) {
+        @content;
+    }
+}
+
+@mixin hover-grad {
+    background: linear-gradient(
+        98.25deg,
+        $primary-color 18.56%,
+        $active-color 76.02%
+    );
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+}
+
+.app {
+    background: linear-gradient(180.96deg, #0d1e48 -0.67%, #304571 100.39%);
+    color: $white-color;
+}
+
+.h3 {
+    font-size: 1.286rem;
+    font-weight: 800;
+
+    @include md {
+        font-size: 1.714rem;
+    }
+
+    @include lg {
+        font-size: 2.286rem;
+    }
+}
+
+.button {
+    display: inline-flex;
+    border-radius: calc(infinity * 1px);
+    background-color: $primary-color;
+    color: $black-color;
+    padding: 7px 40px;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 100%;
+
+    @include md {
+        font-size: 1.571rem;
+        padding: 14px 40px;
+    }
+
+    &--outline {
+        background-color: transparent;
+        border: 2px solid $primary-color;
+        color: $primary-color;
+    }
+}
+
+nav {
+    height: 3.429rem;
+    background-color: $black-color;
+    display: flex;
+    align-items: center;
+    padding: 0 1.429rem 0 1.429rem;
+    justify-content: space-between;
+    z-index: 100;
+    position: relative;
+
+    @include md {
+        height: 5.714rem;
+    }
+
+    @include lg {
+    }
+
+    .menu {
+        position: absolute;
+
+        display: none;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 2.143rem;
+        background-color: $black-color;
+        right: 0;
+
+        &__opened {
+            display: flex;
+        }
+
+        @include md {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+        }
+
+        &__item {
+            font-size: 1.286rem;
+            color: $white-color;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                @include hover-grad;
+            }
+
+            #cart-gradient {
+                opacity: 0;
+
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .menu-icon {
+        cursor: pointer;
+        @include md {
+            display: none;
+        }
+    }
+}
+
+.header {
+    position: relative;
+    overflow: auto;
+    color: $white-color;
+    z-index: 1;
+
+    background:
+        linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(15, 20, 32, 0.79)),
+        url("./assets/header-bg.png") no-repeat right center;
+    background-size: cover;
+
+    &__earth {
+        position: absolute;
+        width: 300px;
+        top: -120px;
+        left: 16px;
+
+        @include md {
+            left: auto;
+            right: -73px;
+            top: 0;
+        }
+
+        @include lg {
+            left: auto;
+            right: 90px;
+            top: 100px;
+        }
+    }
+
+    &__text {
+        padding: 220px 0 44px 0;
+        text-align: center;
+
+        @include md {
+            padding: 100px 30px;
+            text-align: left;
+        }
+
+        & > h1 {
+            font-size: 2.571rem;
+            font-weight: 800;
+            line-height: 100%;
+
+            & > span {
+                color: $active-color;
+            }
+
+            @include md {
+                font-size: 3.429rem;
+            }
+
+            @include lg {
+                font-size: 5.143rem;
+            }
+        }
+
+        & > h4 {
+            font-size: 1.143rem;
+
+            & > span {
+                color: $primary-color;
+            }
+
+            @include md {
+                font-size: 1.571rem;
+            }
+            @include lg {
+                font-size: 2.286rem;
+            }
+        }
+    }
+}
+
+.offers {
+    margin: 50px 20px;
+
+    &__list {
+        display: grid;
+        gap: 30px;
+
+        @include md {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__item {
+        background-color: black;
+
+        @include lg {
+            &:first-child,
+            &:last-child {
+                grid-column: span 2;
+
+                .offer__title {
+                    font-size: 5.286rem;
+                }
+                .offer__text {
+                    font-size: 1.857rem;
+                }
+            }
+        }
+    }
+
+    .offer {
+        background:
+            linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0) 0%,
+                rgba(15, 20, 32, 0.79) 100%
+            ),
+            var(--bg);
+        padding: 100px 27px 32px 27px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        align-items: start;
+        justify-content: end;
+        border-radius: 10px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+
+        &__title {
+            font-size: 2.857rem;
+            font-weight: 800;
+            line-height: 100%;
+            margin: 0;
+        }
+
+        &__text {
+            font-size: 1.143rem;
+            font-weight: 800;
+            line-height: 100%;
+            margin: 0;
+        }
+    }
+}
+
+.info {
+    margin: 50px 20px;
+    font-weight: 700;
+
+    @include md {
+        font-size: 1.143rem;
+    }
+
+    @include lg {
+        font-size: 1.429rem;
+    }
+
+    &__read-more-state {
+        display: none;
+    }
+
+    & > label {
+        color: $primary-color;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.6;
+        }
+
+        &:before {
+            content: "Read more";
+        }
+    }
+
+    &__text {
+        opacity: 0.6;
+    }
+    &__text-more {
+        display: none;
+    }
+
+    &__read-more-state:checked ~ &__text-more {
+        display: block;
+    }
+
+    &__read-more-state:checked ~ label:before {
+        content: "Read less";
+    }
+}
+
+.footer {
+    background-color: $black-color;
+    color: $primary-color;
+    font-size: 1.286rem;
+    text-align: center;
+    padding: 0 0 20px 0;
+    position: relative;
+    font-weight: 800;
+
+    .rocket {
+        margin-bottom: -50px;
+    }
+}
